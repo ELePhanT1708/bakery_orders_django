@@ -4,8 +4,40 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.utils import timezone
+from django.views.generic import ListView
+
 from .forms import AddProduct, OrderItemForm, OrderForm
-from .models import OrderItem, Order, Product
+from .models import OrderItem, Order, Product, Slide
+
+
+def home(request):
+    slides = Slide.objects.all()
+    return render(request, 'home_page.html', {'slides': slides})
+
+
+class ViewProducts(ListView):
+    model = Product
+    template_name = 'menu.html'
+    extra_context = {'title': 'MENU', 'products': Product.objects.all()}
+
+
+class ViewOrders(ListView):
+    model = Order
+    template_name = 'orders.html'
+    context_object_name = 'orders'
+    extra_context = {'title': 'Заказы',
+                     'current_status': 0}
+
+    def get_queryset(self):
+        return Order.objects.all().order_by('person_name')
+
+    def get(self, request, *args, **kwargs):
+        orders = Order.objects.all()
+        for order in orders:
+            if order.current_status < 100:
+                order.update_status()
+        return super().get(request, *args, **kwargs)
 
 
 def order(request):
@@ -25,7 +57,7 @@ def order(request):
                 except KeyError:
                     pass
             messages.success(request, 'Order was created ! ')
-            return redirect('order')
+            return redirect('home')
     else:
         form_items = OrderItemFormSet()
         form_name = OrderForm()
@@ -43,7 +75,7 @@ def add_product(request):
                               )
             product.save()
             messages.success(request, 'Product was added ! ')
-            return redirect('product')
+            return redirect('home')
     else:
         form = AddProduct()
     return render(request, 'add_product.html', {'form': form,

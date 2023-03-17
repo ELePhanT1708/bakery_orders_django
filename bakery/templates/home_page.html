@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block content %}
+<section class="hero">
+  <h2 class="hero__title" align="center">Welcome !</h2>
+  {% for slide in slides %}
+  <div class="item lifted"  align="center">
+    <img style='height: 40%; width: 40%; object-fit: contain' src="{{ slide.image.url }}">
+    <div class="caption-content">
+      <h1 class="caption lifted">{{ slide.header }} </h1><br>
+      <p class="caption2 lifted">{{ slide.caption }}</p>
+    </div>
+  </div>
+  {% endfor %}
+
+</section>
+{% endblock %}
+<body>
+
+</body>
+</html>

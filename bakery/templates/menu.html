@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block maintitle %}
+<div class="col-md-12">
+    <h3>MENU</h3>
+</div>
+{% endblock maintitle%}
+
+{% block content %}
+{% for product in products %}
+<div class="card col-md-3" align="center">
+  <img class="card-img-top" src="{{ product.image.url}}" width="400" height="250" alt="Card image cap">
+
+  <div class="card-body">
+
+    <h5 class="card-title">
+      <a>{{ product.name }}
+      </a>
+    </h5>
+    <p class="card-text">
+      <strong>Name :</strong> <a href="#">{{product.name}}<br></a>
+      <strong>Price :</strong> <a href="#">{{ product.price }}<br></a>
+      <strong>Time :</strong> <a href="#">{{ product.time_to_cook }}<br></a>
+    </p>
+  </div>
+</div>
+
+{% endfor %}
+{% endblock %}

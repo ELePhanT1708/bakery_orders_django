@@ -1,7 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock %}
+{% block maintitle %}
+<div class="col-md-12">
+
+</div>
 <form method="post">
     {% csrf_token %}
-
     {{ form_name.as_p }}
     {{ form.as_p }}
-    <button type="submit">Add to cart</button>
-</form>
+    <button type="submit" class="btn btn-primary">Add to cart</button>
+</form></form>
+
+
+{% endblock %}
+

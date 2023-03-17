@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block maintitle %}
+<div class="col-md-12">
+    <h3>MENU</h3>
+</div>
+{% endblock maintitle%}
+
+{% block content %}
+{% for order in orders %}
+<div class="card col-md-3" align="center">
+  <div class="card-body">
+
+    <h5 class="card-title">
+      <a>{{ order.person_name }}
+      </a>
+    </h5>
+    <p class="card-text">
+    <strong>Total price :</strong> {{order.total_price}}<br></a>
+    <strong>Total time :</strong> {{order.total_time}}<br></a>
+      <div class="progress">
+  <div class="progress-bar" role="progressbar" style="width: {{ order.current_status }}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ order.current_status }}%</div>
+</div>
+    </p>
+  </div>
+</div>
+
+{% endfor %}
+{% endblock %}
