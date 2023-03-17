@@ -1,17 +1,26 @@
-from django.forms import forms
+import django.forms as forms
 
-from bakery.order.models import Order
+from .models import Order, Product, OrderItem
 
 
-class AddOrder(forms.ModelForm):
+class OrderItemForm(forms.ModelForm):
+    product = forms.ModelChoiceField(queryset=Product.objects.all())
+    quantity = forms.IntegerField(min_value=1)
+
     class Meta:
-        model = Order
-        fields = ['personName', 'productId', 'l']
+        model = OrderItem
+        fields = ('product', 'quantity')
+
+
+class OrderForm(forms.Form):
+    person_name = forms.CharField(max_length=25)
+
+
+class AddProduct(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'
         widgets = {
             'name': forms.TextInput(attrs={"class": "form-control",
-                                           "placeholder": "Иван"}),
-            'surname': forms.TextInput(attrs={"class": "form-control",
-                                              "placeholder": "Павлович"}),
-            'last_name': forms.TextInput(attrs={"class": "form-control",
-                                                "placeholder": "Смирнов"}),
+                                           "placeholder": "Круассан"}),
         }
