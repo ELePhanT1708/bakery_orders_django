@@ -42,7 +42,7 @@ Relation MANY-to-MANY between product and order created by temp table OrderItem 
 
 ### Orders in board with progress bar
 In each request this page will update info with defined get_queryset function
-![image](https://user-images.githubusercontent.com/58446568/226162662-bd33c0d2-f330-410e-ae4d-ac5c391540ca.png)
+![image](https://user-images.githubusercontent.com/58446568/226162810-5ceaa580-09ff-4a9d-83b8-463d1792a8e9.png)
 
 
 ### MENU page
