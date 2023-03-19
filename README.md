@@ -25,32 +25,12 @@ py namage.py runserver
 ``` 
 
 
-Telegram bot link: https://t.me/CodeForce_tasks_bot
-
-Add information to database:
-You have to start from requesting to this endpoint
-It will add all info from CodeForces API , it will take about 10 minutes
-```sh
-http://localhost:8000/tasks/save_all_tasks_initial 
-``` 
-After you can use telegram bot.
-
-
-
-
 ## Implementation details
 
-Telegram bot link: https://t.me/CodeForce_tasks_bot 
-In bot were included definitions of existing endpoints , and how to create request for get proper answer.
+For read and write to database used Django ORM.
 
-Updating of database based on fastapi_utils library with decorator @repeat_every(seconds=60 * 60) which send request to fastapi api to make update
+Relation MANY-to-MANY between product and order created by temp table OrderItem which has order_id and product_id with quantity.
 
-MANY-to-MANY relations between tags and tasks implemented as temp topicInTask table which have task_id and tag_id . 
-
-## Confines
-
-1. During update the database , code will add only new tasks information to database and will not update old information bout existing tasks in database.
-2. 
 
 
 ## GUI
