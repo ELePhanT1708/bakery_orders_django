@@ -67,12 +67,10 @@ def order(request):
 
 def add_product(request):
     if request.method == "POST":
-        form = AddProduct(request.POST)
+        form = AddProduct(request.POST, request.FILES)
+
         if form.is_valid():
-            product = Product(name=form.cleaned_data.get('name'),
-                              time_to_cook=form.cleaned_data.get('time_to_cook'),
-                              price=form.cleaned_data.get('price'),
-                              )
+            product = form.save(commit=False)
             product.save()
             messages.success(request, 'Product was added ! ')
             return redirect('home')
